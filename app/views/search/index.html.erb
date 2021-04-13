@@ -6,6 +6,8 @@
   
   <% if @response %>
     <div>
-      <%= @response.body %>
+      <% @parsed_json.each do |parsed| %>
+        <%= parsed["id"] %>
+        <% end %>
     </div>
   <% end %>
