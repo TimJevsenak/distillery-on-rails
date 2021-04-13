@@ -29,6 +29,11 @@ gem 'jbuilder', '~> 2.7'
 
 gem 'devise'
 
+gem 'omniauth', '~> 1.9.1'
+
+gem 'omniauth-google-oauth2'
+gem 'omniauth-facebook', '~> 4.0'
+
 gem 'faraday'
 
 gem 'bootstrap'
