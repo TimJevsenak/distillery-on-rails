@@ -75,7 +75,7 @@ Rails.application.configure do
     :openssl_verify_mode => OpenSSL::SSL::VERIFY_NONE,
     :password => ENV['PASSWORD'],
     :domain => 'brewery-on-rails.herokuapp.com',
-    :address => 'mail.povs.se',
+    :address => 'brewery.povs.se',
     :port => 465,
     :authentication => 'plain',
     :tls => true,
