@@ -71,12 +71,14 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :user_name => ENV['MAIL_USERNAME'],
-    :password => ENV['MAIL_PASSWORD'],
+    :user_name => ENV['USERNAME'],
+    :openssl_verify_mode => OpenSSL::SSL::VERIFY_NONE,
+    :password => ENV['PASSWORD'],
     :domain => 'brewery-on-rails.herokuapp.com',
-    :address => 'smtp.gmail.com',
-    :port => 587,
+    :address => 'mail.povs.se',
+    :port => 465,
     :authentication => 'plain',
+    :tls => true,
     :enable_starttls_auto => true
   }
 
