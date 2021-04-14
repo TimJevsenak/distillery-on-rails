@@ -1,21 +1,16 @@
-<%= form_with(url: search_path, method: "get", local: true) do %>
-    <%= label_tag(:location, "Enter Location name:") %>
-    <%= text_field_tag(:location) %>
-    <%= submit_tag("Search") %>
-  <% end %>
-  
   <% if @response %>
   <div class="ml-4 mr-4">
     <div class="row text-center m-auto">
       <% @parsed_json.each do |parsed| %>
-      <div class="card border-dark mb-3 mr-2 ml-2 col-md-3 p-0">
-      <div class="card-header w-100"><%= parsed["name"] %></div>
-      <div class="card-body text-dark">
-        <h5 class="card-title">Dark card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      </div>
-    </div>
-        <% end %>
+          <div class="card border-dark mb-3 mr-2 ml-2 col-md-3 p-0">
+          <% if parsed['latitude'].nil? && parsed['longitude'].nil? %><div class="card-header w-100"><%= parsed["street"] || "No address found" %> <%= "- " + parsed["city"] + ", " + parsed["state"] %></div>
+          <% else %><%= link_to "https://www.google.com/maps/search/?api=1&query="+parsed['latitude']+"," +parsed['longitude']+ "", class:"text-dark", target: "_blank" do %><div class="card-header w-100"><%= parsed["street"] || "No address found" %> <%= "- " + parsed["city"] + ", " + parsed["state"] %><% end %></div><% end %>
+          <div class="card-body text-dark">
+            <h5 class="card-title"><%= parsed["name"] %></h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+           </div>
+      <% end %>
     </div>
   </div>
   <% end %>
