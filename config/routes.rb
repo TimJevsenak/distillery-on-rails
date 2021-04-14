@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   root to: "home#index"
 
   get '/search' => 'search#index', :as => 'search'
+  get '/brewery/:id' => 'search#show', :as => 'brewery'
 end
