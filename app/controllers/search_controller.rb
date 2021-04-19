@@ -9,7 +9,7 @@ class SearchController < ApplicationController
 
   def show
         @response = Openbrewerydb::Search.by_id(params[:id])
-        @breweries = JSON.parse(@response.body)
-        @brewery = @breweries.first
+        @brewery = JSON.parse(@response.body)
+        @comments = Comment.where(:brewery_id == @brewery["id"])
   end
 end

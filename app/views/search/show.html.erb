@@ -1,1 +1,8 @@
-<%= @brewery.name %>
+<%= @brewery["name"] %>
+<hr>
+<% @comments.each do |comment| %>
+<%= comment.rating %> - 
+<%= comment.text %>
+-
+<%= comment.user.email %>
+<% end %>

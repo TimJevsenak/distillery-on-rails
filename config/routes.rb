@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'comments/create'
+  get 'comments/update'
+  get 'comments/delete'
   get 'search/index'
   devise_for :users, controllers: {
     omniauth_callbacks: 'users/omniauth'
