@@ -9,6 +9,15 @@ ActiveAdmin.register_page "Dashboard" do
       end
     end
 
+    section "Recent Reviws" do
+      table_for Comment.order("created_at desc").limit(5) do
+        column :rating
+        column "Review", :text
+        column "Date", :created_at
+      end
+      strong { link_to "View all Reviews", admin_user_reviews_path }
+    end
+
     # Here is an example of a simple dashboard with columns and panels.
     #
     # columns do
