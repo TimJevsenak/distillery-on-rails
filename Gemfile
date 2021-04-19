@@ -28,6 +28,7 @@ gem 'jbuilder', '~> 2.7'
 # gem 'image_processing', '~> 1.2'
 
 gem 'devise'
+gem 'activeadmin'
 
 gem 'omniauth', '~> 1.9.1'
 
