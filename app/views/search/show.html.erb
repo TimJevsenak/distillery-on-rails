@@ -27,9 +27,9 @@
     
     <%= f.hidden_field :brewery_id, value: @brewery["id"] %>
     <%= f.hidden_field :user_id, value: current_user.id %>
-    <%= f.label :rating, "Ocena (1-5):", class: "form-check-label" %>
+    <%= f.label :rating, "Ocena (1-5):", class: "form-check-label", :required => true %>
     <%= f.number_field :rating, min: 1, max: 5, class: "form-control mt-2" %>
-    <%= f.label :text, "Opis:", class: "form-check-label" %>
+    <%= f.label :text, "Opis:", class: "form-check-label", :required => true %>
     <%= f.text_area :text, class: "form-control mt-2" %>
     <%= f.submit "Submit", class: "btn btn-outline-primary mt-2 mb-2", disable_with: 'Submiting...' %>
 <% end %>
