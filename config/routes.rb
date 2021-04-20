@@ -13,4 +13,6 @@ Rails.application.routes.draw do
 
   get '/search' => 'search#index', :as => 'search'
   get '/brewery/:id' => 'search#show', :as => 'brewery'
+
+  resources :comments
 end

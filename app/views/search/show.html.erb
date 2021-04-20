@@ -1,8 +1,17 @@
 <%= @brewery["name"] %>
 <hr>
+<%= form_for @comment do |f| %>
+    
+    <%= f.hidden_field :brewery_id, value: @brewery["id"] %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.text_field :rating %>
+    <%= f.text_area :text %>
+    <%= f.submit "Submit", disable_with: 'Submiting...' %>
+<% end %>
 <% @comments.each do |comment| %>
 <%= comment.rating %> - 
 <%= comment.text %>
 -
 <%= comment.user.email %>
+<br>
 <% end %>
