@@ -1,22 +1,31 @@
-<%= @brewery["name"] %>
-<hr>
-
-<div class="container bootstrap snippets bootdey">
+<div class="row visoko m-0">
+<div class="col-6 p-0">
+<div class="bootstrap snippets bootdey">
     <div class="row">
-		<div class="col-md-12">
-		    <div class="blog-comment">
-				<h3 class="text-success">Reviews</h3>
-                <hr/>
+		<div class="col-md-12 ml-4">
+        <h2 class="mt-2"><%= @brewery["name"] %></h2>
+        <p><%= @brewery["brewery_type"] %> - brewery</p>
+        <p><strong>Address: </strong><%= @brewery["street"] %>, <%= @brewery["city"] %> <%= @brewery["state"] %></p>
+        <hr>
+        <h3>Contact:</h3>
+        <p>Phone: <a href='tel:<%= @brewery["phone"] %>' ><%= @brewery["phone"] %></a></p>
+        <p>Website: <a href='<%= @brewery["website_url"] %>' target="_blank" ><%= @brewery["website_url"] %></a></p>
+		    <div class="blog-comment pl-0">
+				<h3 class="text-success mb-4">Reviews</h3>
 				<ul class="comments">
+                <% if @comments.empty? %>
+                 <h2 class="text-secondary">No reviews yet! Add one!</h2>
+                <% else %>
 				<% @comments.each do |comment| %>
                     <li class="clearfix">
                         <img src="https://bootdey.com/img/Content/user_1.jpg" class="avatar" alt="">
                         <div class="post-comments">
-                        <p class="meta">Dec 18, 2014 <a href="#"><%= comment.user.email %></a> rates : <i class="pull-right"><large><% comment.rating.times do %><span style="font-size:200%;color:#ffcc00;">&starf;</span><% end %></large></i></p>
+                        <p class="meta"><%= comment.created_at.strftime("%B %d %Y") %> <a href="#"><%= comment.user.email %></a> rates : <i class="pull-right"><large><% comment.rating.times do %><span style="font-size:200%;color:#ffcc00;">&starf;</span><% end %></large></i></p>
                         <p><%= comment.text %></p>
                     </div>
                     </li>
-                    <% end %>
+                <% end %>
+                <% end %>
 				</ul>
 			</div>
 		</div>
@@ -36,4 +45,18 @@
 </div>
 <% end %>
 	</div>
+</div>
+</div>
+<div class="col-6 p-0">
+<% if @brewery['latitude'].nil? && @brewery['longitude'].nil? %>
+<img src="https://media.npr.org/assets/img/2018/10/16/rts1u2te-71fe69214f2094429ea5ca2485cd1fbd5ee8383f.jpg" width="100%">
+<% else %>
+<iframe
+  width="100%"
+  height="100%"
+  frameborder="0" style="border:0"
+  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBXkp23WHSduMxsNas6EbuwR2PU3KvOEms&q=<%= @brewery['latitude'] %>,<%= @brewery['longitude'] %>" allowfullscreen>
+</iframe>
+<% end %>
+</div>
 </div>
