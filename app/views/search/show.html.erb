@@ -1,17 +1,39 @@
 <%= @brewery["name"] %>
 <hr>
+
+<div class="container bootstrap snippets bootdey">
+    <div class="row">
+		<div class="col-md-12">
+		    <div class="blog-comment">
+				<h3 class="text-success">Reviews</h3>
+                <hr/>
+				<ul class="comments">
+				<% @comments.each do |comment| %>
+                    <li class="clearfix">
+                        <img src="https://bootdey.com/img/Content/user_1.jpg" class="avatar" alt="">
+                        <div class="post-comments">
+                        <p class="meta">Dec 18, 2014 <a href="#"><%= comment.user.email %></a> rates : <i class="pull-right"><large><% comment.rating.times do %><span style="font-size:200%;color:#ffcc00;">&starf;</span><% end %></large></i></p>
+                        <p><%= comment.text %></p>
+                    </div>
+                    </li>
+                    <% end %>
+				</ul>
+			</div>
+		</div>
+        <% if user_signed_in? %>
+<div class="form-group">
+<h4>Write a review!</h4><br>
 <%= form_for @comment do |f| %>
     
     <%= f.hidden_field :brewery_id, value: @brewery["id"] %>
     <%= f.hidden_field :user_id, value: current_user.id %>
-    <%= f.text_field :rating %>
-    <%= f.text_area :text %>
-    <%= f.submit "Submit", disable_with: 'Submiting...' %>
+    <%= f.label :rating, "Ocena (1-5):", class: "form-check-label" %>
+    <%= f.number_field :rating, min: 1, max: 5, class: "form-control mt-2" %>
+    <%= f.label :text, "Opis:", class: "form-check-label" %>
+    <%= f.text_area :text, class: "form-control mt-2" %>
+    <%= f.submit "Submit", class: "btn btn-outline-primary mt-2 mb-2", disable_with: 'Submiting...' %>
 <% end %>
-<% @comments.each do |comment| %>
-<%= comment.rating %> - 
-<%= comment.text %>
--
-<%= comment.user.email %>
-<br>
+</div>
 <% end %>
+	</div>
+</div>
