@@ -10,21 +10,16 @@
        <%= link_to 'Home', root_path, class:'nav-link' %><span class="sr-only">(current)</span>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
+        <% if user_signed_in? %>
+          <li>
+          <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "nav-link") %>
+          <%= current_user.email %>  
+          </li>
+        <% else %>
+          <li>
+          <%= link_to('Login', new_user_session_path, class: "nav-link") %>  
+          </li>
+        <% end %>
       </li>
     </ul>
     <%= form_with(url: search_path, method: "get", local: true, class: "form-inline my-2 my-lg-0") do %>

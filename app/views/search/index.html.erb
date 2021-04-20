@@ -10,7 +10,7 @@
           <%= link_to brewery_path(id: parsed["id"]), class: "nohover" do %>
           <div class="card-body text-dark">
             <h5 class="card-title"><%= parsed["name"] %></h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <p class="card-text"><%= parsed["brewery_type"] %> brewery <br><%= parsed["website_url"] %></p>
           </div>
           <% end %>
           </div>
