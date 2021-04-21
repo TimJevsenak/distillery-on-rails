@@ -36,7 +36,7 @@
     ];
 
     var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 10,
+      zoom: 11,
       center: new google.maps.LatLng(<% @parsed_json.each do |parsed| %><% if parsed["latitude"].nil? && parsed["latitude"].nil? %><% else %><%= parsed['latitude'] %>, <%= parsed['longitude'] %><% break %><% end %><% end %>),
       mapTypeId: google.maps.MapTypeId.ROADMAP
     });
