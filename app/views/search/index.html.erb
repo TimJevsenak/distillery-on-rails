@@ -30,7 +30,7 @@
       <% @parsed_json.each do |parsed| %>
       <% if parsed["latitude"].nil? && parsed["latitude"].nil? %>
       <% else %>
-      ['<%= parsed["name"] %>', <%= parsed["latitude"] %>, <%= parsed["longitude"] %>],
+      ['<%= parsed["name"] %>', <%= parsed["latitude"] %>, <%= parsed["longitude"] %>, <%= parsed["id"] %>],
       <% end %>
       <% end %>
     ];
@@ -53,7 +53,7 @@
 
       google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
-          infowindow.setContent(locations[i][0]);
+          infowindow.setContent("<a href='/brewery/"+locations[i][3]+"'>"+locations[i][0]+"</a>");
           infowindow.open(map, marker);
         }
       })(marker, i));
