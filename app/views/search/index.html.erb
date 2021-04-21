@@ -1,9 +1,11 @@
+<div class="row m-0">
+<div class="col-6 p-0">
   <% if @response %>
   <div class="ml-4 mr-4">
     <div class="row text-center m-auto">
       <% @parsed_json.each do |parsed| %>
         
-          <div class="card border-dark mb-3 mr-2 ml-2 col-md-3 p-0">
+          <div class="card border-dark mb-3 mr-2 ml-2 col-md-5 p-0">
         
           <% if parsed['latitude'].nil? && parsed['longitude'].nil? %><div class="card-header w-100"><%= parsed["street"] || "No address found" %> <%= "- " + parsed["city"] + ", " + parsed["state"] %></div>
           <% else %><%= link_to "https://www.google.com/maps/search/?api=1&query="+parsed['latitude']+"," +parsed['longitude']+ "", class:"text-dark", target: "_blank" do %><div class="card-header w-100"><%= parsed["street"] || "No address found" %> <%= "- " + parsed["city"] + ", " + parsed["state"] %><% end %></div><% end %>
@@ -19,3 +21,43 @@
     </div>
   </div>
   <% end %>
+</div>
+<div class="col-6 p-0">
+  <div id="map" style="width: 100%; height: 1100px;"></div>
+
+  <script type="text/javascript">
+    var locations = [
+      <% @parsed_json.each do |parsed| %>
+      <% if parsed["latitude"].nil? && parsed["latitude"].nil? %>
+      <% else %>
+      ['<%= parsed["name"] %>', <%= parsed["latitude"] %>, <%= parsed["longitude"] %>],
+      <% end %>
+      <% end %>
+    ];
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 10,
+      center: new google.maps.LatLng(<% @parsed_json.each do |parsed| %><% if parsed["latitude"].nil? && parsed["latitude"].nil? %><% else %><%= parsed['latitude'] %>, <%= parsed['longitude'] %><% break %><% end %><% end %>),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    var infowindow = new google.maps.InfoWindow();
+
+    var marker, i;
+
+    for (i = 0; i < locations.length; i++) {  
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+        map: map
+      });
+
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          infowindow.setContent(locations[i][0]);
+          infowindow.open(map, marker);
+        }
+      })(marker, i));
+    }
+  </script>
+</div>
+</div>
