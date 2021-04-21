@@ -16,7 +16,11 @@
                 <% if @comments.empty? %>
                  <h2 class="text-secondary">No reviews yet! Add one!</h2>
                 <% else %>
+                <% @combined = 0.0  %>
+                <% @count = 0 %>
 				<% @comments.each do |comment| %>
+                <% @combined = @combined+comment.rating%>
+                <% @count = @count + 1 %>
                     <li class="clearfix">
                         <img src="https://bootdey.com/img/Content/user_1.jpg" class="avatar" alt="">
                         <div class="post-comments">
@@ -25,6 +29,8 @@
                     </div>
                     </li>
                 <% end %>
+                <hr>
+                <p>The average rating for this brewery is: <strong><%= @combined/@count %></strong></p>
                 <% end %>
 				</ul>
 			</div>
