@@ -21,13 +21,23 @@
 				<% @comments.each do |comment| %>
                 <% @combined = @combined+comment.rating%>
                 <% @count = @count + 1 %>
-                    <li class="clearfix">
-                        <img src="https://bootdey.com/img/Content/user_1.jpg" class="avatar" alt="">
-                        <div class="post-comments">
-                        <p class="meta"><%= comment.created_at.strftime("%B %d %Y") %> <a href="#"><%= comment.user.email %></a> rates : <i class="pull-right"><large><% comment.rating.times do %><span style="font-size:200%;color:#ffcc00;">&starf;</span><% end %></large></i></p>
-                        <p><%= comment.text %></p>
-                    </div>
-                    </li>
+                    <% if !comment.blacklist? %>
+                        <li class="clearfix">
+                            <img src="https://bootdey.com/img/Content/user_1.jpg" class="avatar" alt="">
+                            <div class="post-comments">
+                            <p class="meta"><%= comment.created_at.strftime("%B %d %Y") %> <a href="#"><%= comment.user.email %></a> rates : <i class="pull-right"><large><% comment.rating.times do %><span style="font-size:200%;color:#ffcc00;">&starf;</span><% end %></large></i></p>
+                            <p><%= comment.text %></p>
+                        </div>
+                        </li>
+                    <% else %>
+                        <li class="clearfix">
+                            <img src="https://bootdey.com/img/Content/user_2.jpg" class="avatar" alt="">
+                            <div class="post-comments">
+                            <p class="meta"><large><% comment.rating.times do %><span style="font-size:200%;color:#ffcc00;">&starf;</span><% end %></large></p>
+                            <p><i>This review has been removed by an admin.</i></p>
+                        </div>
+                        </li>
+                    <% end %>
                 <% end %>
                 <hr>
                 <p>The average rating for this brewery is: <strong><%= @combined/@count %></strong></p>

@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 2021_05_03_185712) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "brewery_id"
     t.integer "user_id"
-    t.boolean "blacklist", default: false, null: false
+    t.boolean "blacklist", default: false
   end
 
   create_table "users", force: :cascade do |t|

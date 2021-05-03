@@ -18,6 +18,6 @@ class CommentsController < ApplicationController
 
   private
     def comment_params
-      params.require(:comment).permit(:user_id, :brewery_id, :text, :rating, :created_at, :updated_at)
+      params.require(:comment).permit(:user_id, :brewery_id, :text, :rating, :created_at, :updated_at, :blacklist)
     end
 end
