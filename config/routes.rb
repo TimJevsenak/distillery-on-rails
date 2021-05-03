@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'users/show'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   get 'comments/create'
@@ -13,6 +14,7 @@ Rails.application.routes.draw do
 
   get '/search' => 'search#index', :as => 'search'
   get '/brewery/:id' => 'search#show', :as => 'brewery'
+  get '/user/:id' => 'users#show', :as => 'user'
 
   resources :comments
 end

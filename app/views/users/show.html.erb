@@ -1,0 +1,5 @@
+<% if @user.nil? %>
+<%= controller.redirect_to root_path %>
+<% else %>
+<%= @user.email %>
+<% end %>
