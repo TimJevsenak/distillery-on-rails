@@ -1,5 +1,5 @@
 ActiveAdmin.register Comment, :as => "User Reviews" do
-  permit_params :user_id, :brewery_id, :text, :rating, :created_at, :updated_at, :blaclist
+  permit_params :user_id, :brewery_id, :text, :rating, :created_at, :updated_at, :blacklist
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
