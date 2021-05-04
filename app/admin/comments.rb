@@ -1,5 +1,13 @@
 ActiveAdmin.register Comment, :as => "User Reviews" do
   permit_params :user_id, :brewery_id, :text, :rating, :created_at, :updated_at, :blacklist
+
+  batch_action :anonymise do |ids|
+    batch_action_collection.find(ids).each do |comment|
+      comment.user_id = 69
+      comment.save
+    end
+    redirect_to collection_path, alert: "The review has been anonymised."
+  end
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
@@ -26,4 +34,5 @@ ActiveAdmin.register Comment, :as => "User Reviews" do
     CsvDb.convert_save("comment", params[:dump][:file])
     redirect_to :action => :index, :notice => "CSV imported successfully!"
   end
+
 end
