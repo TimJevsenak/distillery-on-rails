@@ -1,5 +1,69 @@
 <% if @user.nil? %>
 <%= controller.redirect_to root_path %>
 <% else %>
-<%= @user.email %>
+<div class="row py-5 px-4 m-0">
+    <div class="col-xl-6 col-md-8 col-sm-10 mx-auto">
+
+        <!-- Profile widget -->
+        <div class="bg-white shadow rounded overflow-hidden">
+            <div class="px-4 pt-0 pb-4 bg-dark">
+                <div class="media align-items-end profile-header">
+                    <div class="profile mr-3"><img src="https://icon-library.com/images/user-icon-jpg/user-icon-jpg-4.jpg" alt="..." width="130" class="rounded mb-2 img-thumbnail"><a href="#" class="btn btn-dark btn-sm btn-block">Edit profile</a></div>
+                    <div class="media-body mb-5 text-white">
+                        <h4 class="mt-0 mb-0"><%= @user.email %></h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-light p-4 d-flex justify-content-end text-center">
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item">
+                        <h5 class="font-weight-bold mb-0 d-block"><%= @comments_number %></h5><small class="text-muted"> <i class="fa fa-picture-o mr-1"></i>Comments on breweries</small>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="py-4 px-4">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h5 class="mb-0">Recent comments</h5>
+                </div>
+                <div class="row">
+                    <% if user_signed_in? %>
+<div>
+    <%= form_for @comment do |f| %>
+        
+        <%= f.hidden_field :receiver_id, value: @user.id %>
+        <%= f.hidden_field :user_id, value: current_user.id %>
+        <%= f.label :body, "Komentar:", class: "form-check-label", :required => true %>
+        <%= f.text_area :body, class: "form-control mt-2" %>
+        <%= f.submit "Submit", class: "btn btn-outline-primary mt-2 mb-2", disable_with: 'Submiting...' %>
+    <% end %>
+</div>
+<% else %>
+<h1>TO COMMENT YOU HAVE TO LOG IN!</h1>
+<% end %>
+
+<% if @comments.empty? %>
+    <h2 class="text-secondary">No comments yet! Add one!</h2>
+<% else %>
+<div class="blog-comment w-100">
+<ul class="comments">
+    <% @comments.each do |comment| %>
+        <li class="clearfix">
+            <img src="https://bootdey.com/img/Content/user_1.jpg" class="avatar" alt="">
+            <div class="post-comments">
+            <p class="meta"><%= comment.created_at.strftime("%B %d %Y") %> <a href="/user/<%= comment.user_id %>"><%= comment.user.email %></a></p>
+            <p><%= comment.body %></p>
+            </div>
+        </li>
+    <% end %>
+</ul>
+</div>
+<% end %>
+                </div>
+            </div>
+        </div><!-- End profile widget -->
+
+    </div>
+</div>
 <% end %>

@@ -17,4 +17,5 @@ Rails.application.routes.draw do
   get '/user/:id' => 'users#show', :as => 'user'
 
   resources :comments
+  resources :user_comments
 end
