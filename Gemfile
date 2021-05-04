@@ -34,6 +34,9 @@ gem "haml-rails", "~> 2.0"
 
 gem 'csv'
 
+gem 'prawn'
+gem 'prawn-table'
+
 gem 'omniauth', '~> 1.9.1'
 
 gem 'omniauth-google-oauth2'
