@@ -8,7 +8,7 @@
         <div class="bg-white shadow rounded overflow-hidden">
             <div class="px-4 pt-0 pb-4 bg-dark">
                 <div class="media align-items-end profile-header">
-                    <div class="profile mr-3"><img src="https://icon-library.com/images/user-icon-jpg/user-icon-jpg-4.jpg" alt="..." width="130" class="rounded mb-2 img-thumbnail"><% if @user.id == current_user.id %><%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-dark btn-sm btn-block" %><%= link_to "Download all coments as PDF", user_path(current_user.id, format: "pdf") %><% end %></div>
+                    <div class="profile mr-3"><img src="https://icon-library.com/images/user-icon-jpg/user-icon-jpg-4.jpg" alt="..." width="130" class="rounded mb-2 img-thumbnail"><% if @user.id == current_user.id && user_signed_in? %><%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-dark btn-sm btn-block" %><%= link_to "Download all coments as PDF", user_path(current_user.id, format: "pdf") %><% end %></div>
                     <div class="media-body mb-5 text-white">
                         <h4 class="mt-0 mb-0"><%= @user.email %></h4>
                     </div>
@@ -27,7 +27,7 @@
                 <div class="d-flex align-items-center justify-content-between mb-3">
                     <h5 class="mb-0">Recent comments</h5>
                 </div>
-                    <% if user_signed_in? %>
+<% if user_signed_in? %>
 <div>
     <%= form_for @comment do |f| %>
         
@@ -39,7 +39,7 @@
     <% end %>
 </div>
 <% else %>
-<h1>TO COMMENT YOU HAVE TO LOG IN!</h1>
+<h1>YOU HAVE TO LOG IN TO COMMENT!</h1>
 <% end %>
 
 <% if @comments.empty? %>
