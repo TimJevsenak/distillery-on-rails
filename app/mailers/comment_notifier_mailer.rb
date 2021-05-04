@@ -1,5 +1,5 @@
 class CommentNotifierMailer < ApplicationMailer
-    default from: 'notifications@breweryonrails.com'
+    default from: 'noreply@brewery.povs.se'
 
   def notification_email
     @user = params[:user]
