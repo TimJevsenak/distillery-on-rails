@@ -9,7 +9,7 @@ class UserReviewsPdf < Prawn::Document
     end
 
     def all_comments
-        move_down 200
+        move_down 20
         table comment_rows
     end
 

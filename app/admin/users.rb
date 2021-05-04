@@ -1,5 +1,12 @@
 ActiveAdmin.register User do
 
+  class Comment
+
+    def to_s
+      self.user.email
+    end
+  
+  end
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
