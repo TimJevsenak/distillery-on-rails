@@ -30,6 +30,10 @@ gem 'jbuilder', '~> 2.7'
 gem 'devise'
 gem 'activeadmin'
 
+gem "haml-rails", "~> 2.0"
+
+gem 'csv'
+
 gem 'omniauth', '~> 1.9.1'
 
 gem 'omniauth-google-oauth2'
