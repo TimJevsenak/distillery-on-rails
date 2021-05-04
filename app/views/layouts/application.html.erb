@@ -18,10 +18,10 @@
 
     
     <% if notice %>
-       <div class="container"><div class="row"><div class="col-lg-4"></div><div class="col-lg-4"><p class="notice alert alert-success"><%= notice %></p></div><div class="col-lg-4"></div></div></div>
+       <div class="container position-fixed m-auto mw-0 pt-2"><div class="row"><div class="col-lg-4"></div><div class="col-lg-4"><p class="notice alert alert-success text-center"><%= notice %></p></div><div class="col-lg-4"></div></div></div>
     <% end %>
     <% if alert %>
-      <div class="container"><div class="row"><div class="col-lg-4"></div><div class="col-lg-4"><p class="alert alert-danger"><%= alert %></p></div><div class="col-lg-4"></div></div></div>
+      <div class="container position-fixed m-auto mw-0 pt-2"><div class="row"><div class="col-lg-4"></div><div class="col-lg-4"><p class="alert alert-danger text-center"><%= alert %></p></div><div class="col-lg-4"></div></div></div>
     <% end %>
     
     <%= yield %>

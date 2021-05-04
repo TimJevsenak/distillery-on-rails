@@ -1,6 +1,6 @@
+<% if @parsed_json.length != 0 %>
 <div class="row m-0">
 <div class="col-6 p-0">
-  <% if @response %>
   <div class="ml-4 mr-4">
     <div class="row text-center m-auto">
       <% @parsed_json.each do |parsed| %>
@@ -20,11 +20,11 @@
       <% end %>
     </div>
   </div>
-  <% end %>
+  
 </div>
 <div class="col-6 p-0">
-  <div id="map" style="width: 50%; height: 665px;" class="position-fixed"></div>
-
+  <div id="map" style="width: 50%; height: 93.8vh;" class="position-fixed"></div>
+<% end %>
   <script type="text/javascript">
     var locations = [
       <% @parsed_json.each do |parsed| %>

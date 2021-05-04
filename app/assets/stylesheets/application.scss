@@ -130,7 +130,7 @@ a {
 	background-image: image_url("background.jpg");
   
 	/* Full height */
-	height: 40rem;
+	height: 88.1vh;
   
 	/* Center and scale the image nicely */
 	background-position: center;
@@ -144,4 +144,8 @@ a {
 
   .profile-header {
     transform: translateY(1rem);
+}
+
+.mw-0{
+	max-width: none;
 }
