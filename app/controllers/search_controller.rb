@@ -20,5 +20,9 @@ class SearchController < ApplicationController
         @brewery = JSON.parse(@response.body)
         @comments = Comment.select('comments.*').where('comments.brewery_id = :search', search: @brewery["id"])
         @comment = Comment.new
+
+        @urlofimg = Openbrewerydb::Search.image(@brewery["name"])
+        @urlofimg1 = JSON.parse(@urlofimg.body)
+        @url = @urlofimg1["value"].first["contentUrl"]
   end
 end

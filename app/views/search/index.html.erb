@@ -31,7 +31,7 @@
       <% elsif parsed["latitude"].nil? && parsed["latitude"].nil? && @parsed_json.length == 1 %>
       <% @prazno = 0 %>
       <% else %>
-      ['<%= parsed["name"] %>', <%= parsed["latitude"] %>, <%= parsed["longitude"] %>, <%= parsed["id"] %>],
+      ['<%= parsed["name"] %>', <%= parsed["latitude"] %>, <%= parsed["longitude"] %>, <%= parsed["id"] %>, '<%= parsed["website_url"] %>'],
       <% @prazno = 1 %>
       <% end %>
       <% end %>
@@ -59,7 +59,7 @@
 
       google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
-          infowindow.setContent("<a href='/brewery/"+locations[i][3]+"'>"+locations[i][0]+"</a>");
+          infowindow.setContent("<a href='/brewery/"+locations[i][3]+"'>"+locations[i][0]+"</a><br><br><a href='"+locations[i][4]+"' target='_blank'>"+locations[i][4]+"</a>");
           infowindow.open(map, marker);
         }
       })(marker, i));

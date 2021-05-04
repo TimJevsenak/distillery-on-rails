@@ -65,7 +65,7 @@
 </div>
 <div class="col-6 p-0">
 <% if @brewery['latitude'].nil? && @brewery['longitude'].nil? %>
-<img src="https://media.npr.org/assets/img/2018/10/16/rts1u2te-71fe69214f2094429ea5ca2485cd1fbd5ee8383f.jpg" width="100%">
+<img src='<%= @url %>' width="100%">
 <% else %>
 <iframe
   width="100%"
