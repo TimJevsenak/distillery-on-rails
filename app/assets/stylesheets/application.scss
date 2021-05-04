@@ -124,3 +124,20 @@ a {
 	outline: none;
 	box-shadow: none;
 }
+
+.bg {
+	/* The image used */
+	background-image: url("background.jpg");
+  
+	/* Full height */
+	height: 40rem;
+  
+	/* Center and scale the image nicely */
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+  }
+
+  .pt-dovolj{
+	  padding-top: 15rem;
+  }

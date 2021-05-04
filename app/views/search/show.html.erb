@@ -25,7 +25,7 @@
                         <li class="clearfix">
                             <img src="https://bootdey.com/img/Content/user_1.jpg" class="avatar" alt="">
                             <div class="post-comments">
-                            <p class="meta"><%= comment.created_at.strftime("%B %d %Y") %> <a href="#"><%= comment.user.email %></a> rates : <i class="pull-right"><large><% comment.rating.times do %><span style="font-size:200%;color:#ffcc00;">&starf;</span><% end %></large></i></p>
+                            <p class="meta"><%= comment.created_at.strftime("%B %d %Y") %> <a href="/user/<%= comment.user.id %>"><%= comment.user.email %></a> rates : <i class="pull-right"><large><% comment.rating.times do %><span style="font-size:200%;color:#ffcc00;">&starf;</span><% end %></large></i></p>
                             <p><%= comment.text %></p>
                         </div>
                         </li>
