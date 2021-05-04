@@ -1,8 +1,11 @@
 class UserCommentsController < ApplicationController
     def create
         @comment = UserComment.new(comment_params)
+
+        @user = User.find(@comment.receiver_id)
     
         if @comment.save
+            CommentNotifierMailer.with(user: @user).notification_email.deliver_now
             redirect_to user_path(id: @comment.receiver_id)
         else
             redirect_to root_path
