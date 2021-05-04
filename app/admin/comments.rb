@@ -1,6 +1,16 @@
 ActiveAdmin.register Comment, :as => "User Reviews" do
   permit_params :user_id, :brewery_id, :text, :rating, :created_at, :updated_at, :blacklist
 
+  # filter :user, :collection => proc {(User.all).map{|u| [u.email, u.id]}}
+
+  class User
+
+    def to_s
+      self.email
+    end
+  
+  end
+
   batch_action :anonymise do |ids|
     batch_action_collection.find(ids).each do |comment|
       comment.user_id = 69
