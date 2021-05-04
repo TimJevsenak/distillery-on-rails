@@ -3,6 +3,18 @@ ActiveAdmin.register Comment, :as => "User Reviews" do
 
   # filter :user, :collection => proc {(User.all).map{|u| [u.email, u.id]}}
 
+  before_create do |comment|
+    comments = Comment.all
+    highd = 0
+    comments.each do |c|
+        if c.id > highd
+        highd = c.id
+        end
+    end
+    highd += 1
+    comment.id = highd
+  end
+
   class User
 
     def to_s
