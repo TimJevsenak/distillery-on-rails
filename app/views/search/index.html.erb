@@ -20,7 +20,6 @@
       <% end %>
     </div>
   </div>
-  
 </div>
 <div class="col-6 p-0">
   <div id="map" style="width: 50%; height: 93.8vh;" class="position-fixed"></div>
@@ -28,16 +27,23 @@
   <script type="text/javascript">
     var locations = [
       <% @parsed_json.each do |parsed| %>
-      <% if parsed["latitude"].nil? && parsed["latitude"].nil? %>
+      <% if parsed["latitude"].nil? && parsed["latitude"].nil? && @parsed_json.length != 1 %>
+      <% elsif parsed["latitude"].nil? && parsed["latitude"].nil? && @parsed_json.length == 1 %>
+      <% @prazno = 0 %>
       <% else %>
       ['<%= parsed["name"] %>', <%= parsed["latitude"] %>, <%= parsed["longitude"] %>, <%= parsed["id"] %>],
+      <% @prazno = 1 %>
       <% end %>
       <% end %>
     ];
 
     var map = new google.maps.Map(document.getElementById('map'), {
+      <% if @prazno == 0 %>
+      zoom: 4,
+      <% else %>
       zoom: 11,
-      center: new google.maps.LatLng(<% @parsed_json.each do |parsed| %><% if parsed["latitude"].nil? && parsed["latitude"].nil? %><% else %><%= parsed['latitude'] %>, <%= parsed['longitude'] %><% break %><% end %><% end %>),
+      <% end %>
+      center: new google.maps.LatLng(<% @parsed_json.each do |parsed| %><% if parsed["latitude"].nil? && parsed["latitude"].nil? && @prazno != 0 %><% elsif @prazno == 0 %>40.923914, -99.468859<% else %><%= parsed['latitude'] %>, <%= parsed['longitude'] %><% break %><% end %><% end %>),
       mapTypeId: google.maps.MapTypeId.ROADMAP
     });
 
@@ -59,5 +65,6 @@
       })(marker, i));
     }
   </script>
+</div>
 </div>
 </div>

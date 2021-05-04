@@ -4,6 +4,10 @@ module Openbrewerydb
         Faraday.get 'https://api.openbrewerydb.org/breweries?by_city=' + location
       end
 
+      def self.by_name(name)
+        Faraday.get 'https://api.openbrewerydb.org/breweries?by_name=' + name
+      end
+
       def self.by_id(id)
         Faraday.get 'https://api.openbrewerydb.org/breweries/' + id
       end
