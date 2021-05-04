@@ -4,6 +4,7 @@ class UsersController < ApplicationController
 
     @comments = UserComment.select('user_comments.*').where('user_comments.receiver_id = :search', search: @user.id)
     @comments_number = Comment.where(:user_id => @user.id).count
+    @comments_profiles_number = UserComment.where(:user_id => @user.id).count
     @comment = UserComment.new
 
     respond_to do |format|
