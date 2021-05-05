@@ -25,18 +25,7 @@
   <div id="map" style="width: 50%; height: 93.8vh;" class="position-fixed"></div>
 <% end %>
   <script type="text/javascript">
-    var locations = [
-      <% @parsed_json.each do |parsed| %>
-      <% if parsed["latitude"].nil? && parsed["latitude"].nil? && @parsed_json.length != 1 %>
-      <% elsif parsed["latitude"].nil? && parsed["latitude"].nil? && @parsed_json.length == 1 %>
-      <% @prazno = 0 %>
-      <% else %>
-      ['<%= parsed["name"] %>', <%= parsed["latitude"] %>, <%= parsed["longitude"] %>, <%= parsed["id"] %>, '<%= parsed["website_url"] %>'],
-      <% @prazno = 1 %>
-      <% end %>
-      <% end %>
-    ];
-
+    
     var map = new google.maps.Map(document.getElementById('map'), {
       <% if @prazno == 0 %>
       zoom: 4,
@@ -47,9 +36,58 @@
       mapTypeId: google.maps.MapTypeId.ROADMAP
     });
 
-    var infowindow = new google.maps.InfoWindow();
+  
+const geocoder = new google.maps.Geocoder();
 
+var address = "new york";
+var name = '';
+var website = '';
+var id = 1;
+    var locations = [];
+    var geocodinglocations = [];
+      <% @parsed_json.each do |parsed| %>
+      <% if parsed["latitude"].nil? && parsed["latitude"].nil? && !parsed["street"].nil? %>
+      geocodinglocations = geocodinglocations.concat([['<%= parsed["street"] %>', '<%= parsed["name"] %>', '<%= parsed["website_url"] %>', <%= parsed["id"] %>]])
+      <% @prazno = 0 %>
+      <% else %>
+      locations = locations.concat([['<%= parsed["name"] %>', <%= parsed["latitude"] %>, <%= parsed["longitude"] %>, <%= parsed["id"] %>, '<%= parsed["website_url"] %>']]);
+      <% @prazno = 1 %>
+      <% end %>
+      <% end %>
+
+        var infowindow = new google.maps.InfoWindow();
     var marker, i;
+
+    for (i = 0; i < geocodinglocations.length; i++) {
+
+      geocodeAddress(geocoder, map, i) 
+
+    }
+
+    function geocodeAddress(geocoder, map, i) {
+    geocoder.geocode({ address: geocodinglocations[i][0] }, (results, status) => {
+      if (status === "OK") {
+
+      var infowindow = new google.maps.InfoWindow();
+
+      var marker;
+
+        marker = new google.maps.Marker({
+          map: map,
+          position: results[0].geometry.location,
+        });
+
+        google.maps.event.addListener(marker, 'click', (function(marker) {
+        return function() {
+          infowindow.setContent("<a href='/brewery/"+geocodinglocations[i][3]+"'>"+geocodinglocations[i][1]+"</a><br><br><a href='"+geocodinglocations[i][2]+"' target='_blank'>"+geocodinglocations[i][2]+"</a>");
+          infowindow.open(map, marker);
+        }
+        })(marker));
+      } else {
+        alert("Geocode was not successful for the following reason: " + status);
+      }
+    });
+  }
 
     for (i = 0; i < locations.length; i++) {  
       marker = new google.maps.Marker({
